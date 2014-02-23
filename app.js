@@ -52,7 +52,8 @@ CustomTile.prototype.resize = function(cellRect, pixelRect, animate, duration, o
   // set the texts inside the tile
   this.$el.find('.title').text(m.friendlyname);
   this.$el.find('.uptime').text(uptimeRatio + '%');
-  this.$el.find('.lastresponse').text(lastResponse + 'ms');
+  if (lastResponse > 0)
+    this.$el.find('.lastresponse').text(lastResponse + 'ms');
 
   // call the base to perform the resize
   Tiles.Tile.prototype.resize.call(this, cellRect, pixelRect, animate, duration, onComplete);
