@@ -1,0 +1,52 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #222;
+}
+
+body {
+  font-family: 'Helvetica Neue', arial, sans-serif;
+  padding: 10px;
+}
+
+#countdown {
+  color: #efefef;
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right:0;
+}
+
+.grid {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0;
+  clear: both;
+}
+
+.grid > div {
+  position: absolute;
+}
+
+.grid > div > div {
+  margin: 5px 5px 0 5px;
+}
+
+.red {
+  background-color: rgb(219, 100, 100);
+}
+
+.yellow {
+  background-color: rgb(237,194,64);
+}
+
+.green {
+  background-color: rgb(87, 169, 87);
+}
+
+.grey {
+  background-color: #ddd;
+}
