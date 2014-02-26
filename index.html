@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="http://thinkpixellab.com/tilesjs/tiles.js"></script>
+  <script src="scripts/jquery.knob.js"></script>
+  <script src="scripts/tiles.js"></script>
   <script type="text/javascript" charset="utf-8">
     var debounce = function(func, wait, immediate) {
       var timeout;
@@ -24,7 +25,14 @@
 </head>
 <body>
   <div id="dashboard" class="grid"></div>
-  <div id="countdown"></div>
+    <input id="countdown" type="text" value="0"
+           data-min="0"
+           data-max="100"
+           data-width="30"
+           data-height="30"
+           data-fgcolor="#ddd"
+           data-bgcolor="#222"
+           data-displayinput="false" data-readonly="true" />
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-var resetTimer = 30;
-var count=resetTimer;
+var count=100;
 var counter = null;
 
 var tile_ids = [];
@@ -7,15 +6,15 @@ var monitors = [];
 
 var apiKey = 'u128481-b07c1e2e3752ea582d89e5c5';
 var statusURL = 'http://api.uptimerobot.com/getMonitors';
-var data = {apiKey:apiKey, responseTimes:0, format:'json', noJsonCallback: 1};
+var data = {apiKey:apiKey, responseTimes:0, responseTimesAverage:1, customUptimeRatio:30, format:'json', noJsonCallback: 1};
 
 var el = document.getElementById('dashboard');
 var grid = new Tiles.Grid(el);
 
 // create a custom Tile which customizes the resize behavior
 function CustomTile(tileId, element) {
-    // initialize base
-    Tiles.Tile.call(this, tileId, element);
+  // initialize base
+  Tiles.Tile.call(this, tileId, element);
 }
 
 CustomTile.prototype = new Tiles.Tile();
@@ -82,16 +81,16 @@ function sortByResponse(a, b) {
 }
 
 function timer() {
-  count=count-1;
-  if (count <= 0) {
+  count=count+1;
+  if (count > 100) {
      clearInterval(counter);
-     count = resetTimer;
+     count = 0;
      
      fetchData();
      return;
   }
 
-  $("#countdown").text(count)
+  $('#countdown').val(count).trigger('change');
 }
 
 function updateGrid() {
@@ -113,17 +112,13 @@ function getMonitor(monitorId) {
 	return m;
 }
 
-function jsonUptimeRobotApi() {
-  alert('callback');
-}
-
 function fetchData() {
   $.ajax({
   	url: statusURL,
   	data: data
   }).done(function(e) {
     console.log('Done');
-    
+    console.log(e);
     tile_ids = [];
     monitors = e.monitors;
 
@@ -136,7 +131,7 @@ function fetchData() {
   	//update grid
   	updateGrid();
   	//reset timer
-  	counter=setInterval(timer, 1000);
+  	counter=setInterval(timer, 100);
     
   }).fail(function(xhr, status, error) {
     console.log('Failed: ' + status);
@@ -145,7 +140,10 @@ function fetchData() {
   });
 }
 
-$(function() {
+$(function () {
+
+$("#countdown").knob();
+
   fetchData();
   
   // wait until user finishes resizing the browser
