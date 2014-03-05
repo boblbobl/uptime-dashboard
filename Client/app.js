@@ -130,7 +130,7 @@ function fetchData() {
   	//update grid
   	updateGrid();
   	//reset timer
-  	counter=setInterval(timer, 250);
+  	counter=setInterval(timer, 350);
     
   }).fail(function(xhr, status, error) {
     console.log('Failed: ' + status);
