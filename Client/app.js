@@ -6,7 +6,7 @@ var monitors = [];
 
 var apiKey = 'u128481-b07c1e2e3752ea582d89e5c5';
 var statusURL = 'http://api.uptimerobot.com/getMonitors';
-var data = {apiKey:apiKey, responseTimes:0, responseTimesAverage:1, customUptimeRatio:30, format:'json', noJsonCallback: 1};
+var data = {apiKey:apiKey, responseTimes:1, responseTimesAverage:1, customUptimeRatio:30, format:'json', noJsonCallback: 1};
 
 var el = document.getElementById('dashboard');
 var grid = new Tiles.Grid(el);
@@ -74,10 +74,10 @@ function sortByName(a, b) {
 }
 
 function sortByResponse(a, b) {
-  var aName = a.responsetime != null ? a.responsetime[0].value : -1;
-  var bName = b.responsetime != null ? B.responsetime[0].value : -1; 
+  var response_a = a.responsetime != null ? parseInt(a.responsetime[0].value) : 10000;
+  var response_b = b.responsetime != null ? parseInt(b.responsetime[0].value) : 10000;
   
-  return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+  return ((response_a > response_b) ? -1 : ((response_a < response_b) ? 1 : 0));
 }
 
 function timer() {
@@ -118,11 +118,10 @@ function fetchData() {
   	data: data
   }).done(function(e) {
     console.log('Done');
-    console.log(e);
     tile_ids = [];
     monitors = e.monitors;
 
-    monitors.monitor.sort(sortByName);
+    monitors.monitor.sort(sortByResponse);
 
   	$.each(monitors.monitor, function(e) {
   	  tile_ids.push(this.id);
@@ -131,7 +130,7 @@ function fetchData() {
   	//update grid
   	updateGrid();
   	//reset timer
-  	counter=setInterval(timer, 100);
+  	counter=setInterval(timer, 250);
     
   }).fail(function(xhr, status, error) {
     console.log('Failed: ' + status);
@@ -141,11 +140,10 @@ function fetchData() {
 }
 
 $(function () {
-
-$("#countdown").knob();
+  $("#countdown").knob();
 
   fetchData();
-  
+
   // wait until user finishes resizing the browser
   var debouncedResize = debounce(function() {
       grid.resize();
