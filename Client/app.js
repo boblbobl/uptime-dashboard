@@ -1,4 +1,5 @@
-var count=100;
+var count = 100;
+var timer_interval = 350;
 var counter = null;
 
 var tile_ids = [];
@@ -6,7 +7,7 @@ var monitors = [];
 
 var apiKey = 'u128481-b07c1e2e3752ea582d89e5c5';
 var statusURL = 'http://api.uptimerobot.com/getMonitors';
-var data = {apiKey:apiKey, responseTimes:1, responseTimesAverage:1, customUptimeRatio:30, format:'json', noJsonCallback: 1};
+var data = {apiKey:apiKey, responseTimes:1, responseTimesAverage:0, customUptimeRatio:30, logs:0, format:'json', noJsonCallback: 1};
 
 var el = document.getElementById('dashboard');
 var grid = new Tiles.Grid(el);
@@ -21,6 +22,7 @@ CustomTile.prototype = new Tiles.Tile();
 
 CustomTile.prototype.resize = function(cellRect, pixelRect, animate, duration, onComplete) {
   var m = getMonitor(this.id);
+
   /*
   0 - paused
   1 - not checked yet
@@ -130,9 +132,10 @@ function fetchData() {
   	//update grid
   	updateGrid();
   	//reset timer
-  	counter=setInterval(timer, 350);
+    counter=setInterval(timer, timer_interval);
     
-  }).fail(function(xhr, status, error) {
+  }).fail(function (xhr, status, error) {
+    console.log(xhr);
     console.log('Failed: ' + status);
   }).always(function(xhr, status) {
     console.log('Log: ' + new Date());
@@ -153,7 +156,3 @@ $(function () {
   // when the window resizes, redraw the grid
   $(window).resize(debouncedResize);
 });
-    
-
-
-
