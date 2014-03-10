@@ -5,7 +5,7 @@ var counter = null;
 var tile_ids = [];
 var monitors = [];
 
-var apiKey = 'u128481-b07c1e2e3752ea582d89e5c5';
+var apiKey = 'u83436-4dfbdcdc647891e9911c33da';
 var statusURL = 'http://api.uptimerobot.com/getMonitors';
 var data = {apiKey:apiKey, responseTimes:1, responseTimesAverage:0, customUptimeRatio:30, logs:0, format:'json', noJsonCallback: 1};
 
@@ -52,9 +52,9 @@ CustomTile.prototype.resize = function(cellRect, pixelRect, animate, duration, o
   
   // set the texts inside the tile
   this.$el.find('.title').text(m.friendlyname);
-  this.$el.find('.uptime').text(uptimeRatio + '%');
+  this.$el.find('.uptime').html('<i class="fa fa-chevron-circle-up"></i> ' + uptimeRatio + '%');
   if (lastResponse > 0)
-    this.$el.find('.lastresponse').text(lastResponse + 'ms');
+    this.$el.find('.lastresponse').html('<i class="fa fa-tachometer"></i> ' + lastResponse + 'ms');
 
   // call the base to perform the resize
   Tiles.Tile.prototype.resize.call(this, cellRect, pixelRect, animate, duration, onComplete);
