@@ -68,7 +68,6 @@
   <ItemGroup>
     <Content Include="Content\app.css" />
     <Content Include="app.js" />
-    <Content Include="Content\font-awesome.css" />
     <Content Include="index.html" />
     <Content Include="scripts\jquery.knob.js" />
     <Content Include="scripts\tiles.js" />
