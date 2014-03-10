@@ -37,7 +37,7 @@ CustomTile.prototype.resize = function(cellRect, pixelRect, animate, duration, o
   
   switch(m.status) {
     case '2':
-      if (lastResponse > 1000)
+      if (lastResponse > 2000)
         this.$el.addClass('yellow');
       else
         this.$el.addClass('green');
