@@ -5,7 +5,7 @@ var counter = null;
 var tile_ids = [];
 var monitors = [];
 
-var apiKey = 'u83436-4dfbdcdc647891e9911c33da';
+var apiKey = 'u128481-b07c1e2e3752ea582d89e5c5';
 var statusURL = 'http://api.uptimerobot.com/getMonitors';
 var data = {apiKey:apiKey, responseTimes:1, responseTimesAverage:0, customUptimeRatio:30, logs:0, format:'json', noJsonCallback: 1};
 
